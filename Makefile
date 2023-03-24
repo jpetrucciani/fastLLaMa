@@ -170,7 +170,8 @@ ifndef LLAMA_NO_ACCELERATE
 	# Mac M1 - include Accelerate framework.
 	# `-framework Accelerate` works on Mac Intel as well, with negliable performance boost (as of the predict time).
 	ifeq ($(UNAME_S),Darwin)
-		CFLAGS  += -DGGML_USE_ACCELERATE
+		CFLAGS  += -DGGML_USE_ACCELERATE -D__ARM_FEATURE_DOTPROD
+		CXXFLAGS += -D__ARM_FEATURE_DOTPROD
 		LDFLAGS += -framework Accelerate
 	endif
 endif
